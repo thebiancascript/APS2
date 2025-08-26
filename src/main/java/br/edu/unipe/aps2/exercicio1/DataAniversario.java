@@ -6,12 +6,12 @@ public class DataAniversario {
 	private int mes;
 
 	
-	public void DataAniversario(int dia, int mes){
+	public DataAniversario(int dia, int mes){
 		this.dia = dia;
 		this.mes = mes;
 		}
 		
-	// gets e sets…
+	// gets e setters
 	
 	
 	public boolean equals(Object outraData){
