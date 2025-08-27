@@ -1,45 +1,43 @@
 package br.edu.unipe.aps2.exercicio1;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MinhaAgendaDeAniversarios implements AgendaDeAniversarios {
 
-    private List<Aniversariante> listaAniversariantes;
+    private final ArrayList<Aniversariante> listaAniversariantes;
 
-    // Construtor
     public MinhaAgendaDeAniversarios() {
         this.listaAniversariantes = new ArrayList<>();
     }
 
-    // Adicionar aniversariante
     @Override
-    public void adicionar(Aniversariante a) {
-        if (!listaAniversariantes.contains(a)) { // evita duplicatas
+    public void adicionarAniversariante(String nome, int dia, int mes) {
+        Aniversariante a = new Aniversariante(nome, dia, mes);
+        if (!listaAniversariantes.contains(a)) {
             listaAniversariantes.add(a);
         }
     }
 
-    // Remover aniversariante
-    @Override
-    public void remover(Aniversariante a) {
-        listaAniversariantes.remove(a);
+ @Override
+public ArrayList<String> obterAniversariantesDoDia(int dia, int mes) {
+    ArrayList<String> nomes = new ArrayList<>();
+    for (Aniversariante a : listaAniversariantes) {
+        if (a.getDataAniversario().getDia() == dia && a.getDataAniversario().getMes() == mes) {
+            nomes.add(a.getNome());
+        }
     }
+    return nomes;
+}
 
-    // Listar todos os aniversariantes
     @Override
-    public List<Aniversariante> listar() {
-        return new ArrayList<>(listaAniversariantes); // retorna cópia para não alterar a lista interna
-    }
-
-    // Buscar por nome
-    @Override
-    public Aniversariante buscarPorNome(String nome) {
+    public void removerAniversariante(String nome) {
+        Aniversariante encontrado = null;
         for (Aniversariante a : listaAniversariantes) {
             if (a.getNome().equals(nome)) {
-                return a;
+                encontrado = a;
+                break;
             }
         }
-        return null; // não encontrado
+        if (encontrado != null) listaAniversariantes.remove(encontrado);
     }
 }
